@@ -1,0 +1,2088 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tributex</title>
+  <meta name="description" content="Tributex Contábil — soluções contábeis completas e personalizadas para empresas em Brasília. Contabilidade societária, gestão tributária e financeira com excelência técnica.">
+  <meta property="og:title" content="Tributex | Gestão Contábil e Financeira">
+  <meta property="og:description" content="Soluções contábeis completas e personalizadas para empresas em Brasília. Contabilidade societária e gestão tributária com excelência técnica.">
+  <meta property="og:image" content="logo.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="">
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── Contenção global de overflow horizontal ── */
+    img, iframe, video { max-width: 100%; display: block; }
+    svg                { max-width: 100%; }
+
+    /* Grid e flex: impede min-width: auto travar a contração */
+    .hero-grid > *, .sobre-grid > *, .servicos-grid > *,
+    .diferenciais-grid > *, .contato-grid > *, .numeros-grid > *,
+    .footer-grid > *, .hero-stats > *, .diferencial-list > *,
+    .info-list > *, .hero-actions > * { min-width: 0; }
+
+    /* Textos longos que podem vazar — exclui elementos do odômetro */
+    .info-item a, .info-item p,
+    .footer-col p, .footer-col a,
+    .servico-card p, .num-desc,
+    .dif-text p, .hero-subtitle { overflow-wrap: break-word; word-break: break-word; }
+
+    :root {
+      --orange: #E8752A;
+      --orange-dark: #C45F18;
+      --orange-light: #F5955A;
+      --dark: #1E1E1E;
+      --dark-2: #2C2C2C;
+      --gray: #6B7280;
+      --gray-light: #F4F4F4;
+      --white: #FFFFFF;
+      --border: #E5E7EB;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: clip;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--dark);
+      background: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+      width: 100%;
+      max-width: 100%;
+      overscroll-behavior-x: none;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.97);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow 0.3s;
+    }
+
+    header.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo-wrap { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .logo-wrap img { height: 64px; width: auto; object-fit: contain; }
+
+    nav { display: flex; align-items: center; gap: 32px; }
+
+    nav a {
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--dark);
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--orange); }
+
+    .btn-cta {
+      background: var(--orange);
+      color: var(--white);
+      padding: 10px 22px;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .btn-cta:hover { background: var(--orange-dark); transform: translateY(-1px); }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--dark);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 72px;
+      left: 0;
+      width: 100%;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 24px;
+      flex-direction: column;
+      gap: 16px;
+      z-index: 999;
+    }
+
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-size: 1rem; font-weight: 500; color: var(--dark); text-decoration: none; }
+    .mobile-menu a:hover { color: var(--orange); }
+
+    /* ── HERO ── */
+    #inicio {
+      padding-top: 72px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background:
+        linear-gradient(135deg, rgba(18,18,18,0.88) 0%, rgba(40,40,40,0.88) 100%),
+        url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #inicio::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      right: 0;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(232, 117, 42, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    #inicio::after {
+      content: '';
+      position: absolute;
+      bottom: -80px;
+      left: 0;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(232, 117, 42, 0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(232, 117, 42, 0.15);
+      border: 1px solid rgba(232, 117, 42, 0.3);
+      color: var(--orange-light);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 5vw, 4rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    h1 span { color: var(--orange); }
+
+    .hero-subtitle {
+      font-size: 1.125rem;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.7;
+      margin-bottom: 32px;
+      max-width: 520px;
+    }
+
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+
+    .btn-primary {
+      background: var(--orange);
+      color: var(--white);
+      padding: 14px 28px;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-primary:hover { background: var(--orange-dark); transform: translateY(-2px); }
+
+    .btn-outline {
+      background: rgba(255,255,255,0.08);
+      color: var(--white);
+      padding: 14px 28px;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.3);
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .btn-outline:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.6); }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .stat-item { text-align: center; }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--orange);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.6);
+      margin-top: 4px;
+    }
+
+    .hero-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .hero-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 40px;
+      width: 100%;
+      max-width: 380px;
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-card-icon {
+      width: 56px;
+      height: 56px;
+      background: var(--orange);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .hero-card-icon svg { width: 28px; height: 28px; fill: none; stroke: white; stroke-width: 2; }
+
+    .hero-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .hero-card p { font-size: 0.875rem; color: rgba(255,255,255,0.6); line-height: 1.6; }
+
+    .hero-card-list {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .hero-card-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.8);
+      list-style: none;
+    }
+
+    .check-icon {
+      width: 20px;
+      height: 20px;
+      background: rgba(232, 117, 42, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .check-icon svg { width: 11px; height: 11px; stroke: var(--orange); stroke-width: 2.5; fill: none; }
+
+    /* ── SEÇÕES GERAIS ── */
+    section { padding: 96px 0; }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 12px;
+    }
+
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: var(--orange);
+      border-radius: 2px;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 700;
+      color: var(--dark);
+      line-height: 1.25;
+      margin-bottom: 16px;
+    }
+
+    .section-desc {
+      font-size: 1.05rem;
+      color: var(--gray);
+      max-width: 600px;
+      line-height: 1.7;
+    }
+
+    /* ── SOBRE ── */
+    #sobre { background: var(--white); }
+
+    .sobre-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .sobre-text .slogan {
+      font-size: 1.2rem;
+      font-style: italic;
+      color: var(--orange);
+      font-weight: 600;
+      border-left: 3px solid var(--orange);
+      padding-left: 16px;
+      margin: 24px 0;
+      line-height: 1.5;
+    }
+
+    .sobre-text p {
+      color: var(--gray);
+      line-height: 1.8;
+      margin-bottom: 16px;
+      font-size: 1rem;
+    }
+
+    .sobre-visual { display: block; }
+
+    .sobre-photo-wrap {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.14);
+    }
+
+    .sobre-img {
+      width: 100%;
+      height: 460px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .sobre-float-cards {
+      position: absolute;
+      bottom: 24px;
+      left: 24px;
+      right: 24px;
+      display: flex;
+      gap: 12px;
+    }
+
+    .sobre-float {
+      background: white;
+      border-radius: 12px;
+      padding: 14px 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+      flex: 1;
+    }
+
+    .sobre-float strong {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--orange);
+      line-height: 1;
+    }
+
+    .sobre-float span {
+      font-size: 0.72rem;
+      color: var(--gray);
+      margin-top: 4px;
+      text-align: center;
+    }
+
+    .sobre-float-tag {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      background: var(--orange);
+      color: white;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 8px 14px;
+      border-radius: 20px;
+      letter-spacing: 0.03em;
+    }
+
+    /* ── SERVIÇOS ── */
+    #servicos { background: var(--gray-light); }
+
+    .servicos-header { text-align: center; margin-bottom: 56px; }
+    .servicos-header .section-label { justify-content: center; }
+    .servicos-header h2 { margin: 0 auto 16px; }
+    .servicos-header .section-desc { margin: 0 auto; text-align: center; }
+
+    .servicos-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .servico-card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 36px 28px;
+      border: 1px solid var(--border);
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .servico-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--orange);
+      transform: scaleX(0);
+      transition: transform 0.3s;
+    }
+
+    .servico-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.1); border-color: transparent; }
+    .servico-card:hover::before { transform: scaleX(1); }
+
+    .servico-icon {
+      width: 52px;
+      height: 52px;
+      background: rgba(232, 117, 42, 0.1);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .servico-icon svg { width: 26px; height: 26px; stroke: var(--orange); stroke-width: 1.8; fill: none; }
+
+    .servico-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--dark); margin-bottom: 10px; }
+    .servico-card p { font-size: 0.875rem; color: var(--gray); line-height: 1.65; }
+
+    /* ── BANNER IMAGEM ── */
+    #banner-cta {
+      background:
+        linear-gradient(rgba(15,15,15,0.78), rgba(15,15,15,0.78)),
+        url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+      padding: 96px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .banner-cta-inner { max-width: 720px; }
+    .banner-cta-inner .section-label { color: rgba(255,255,255,0.65); }
+    .banner-cta-inner .section-label::before { background: rgba(255,255,255,0.4); }
+    .banner-cta-inner h2 { color: var(--white); margin-bottom: 16px; }
+    .banner-cta-inner p { color: rgba(255,255,255,0.75); font-size: 1.05rem; line-height: 1.75; margin-bottom: 36px; max-width: 600px; }
+
+    /* ── DIFERENCIAIS ── */
+    #diferenciais { background: var(--white); }
+
+    .diferenciais-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .diferenciais-text h2 { margin-bottom: 24px; }
+
+    .diferencial-list { list-style: none; margin-top: 24px; display: flex; flex-direction: column; gap: 16px; }
+
+    .diferencial-list li {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .dif-icon {
+      width: 36px;
+      height: 36px;
+      background: rgba(232, 117, 42, 0.1);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .dif-icon svg { width: 18px; height: 18px; stroke: var(--orange); stroke-width: 2; fill: none; }
+
+    .dif-text h4 { font-size: 0.95rem; font-weight: 700; color: var(--dark); margin-bottom: 3px; }
+    .dif-text p { font-size: 0.84rem; color: var(--gray); line-height: 1.55; }
+
+    .diferenciais-visual {
+      background:
+        linear-gradient(135deg, rgba(20,20,20,0.93) 0%, rgba(40,40,40,0.93) 100%),
+        url('https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=800&q=80') center/cover no-repeat;
+      border-radius: 24px;
+      padding: 48px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .diferenciais-visual::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(232, 117, 42, 0.2) 0%, transparent 70%);
+    }
+
+    .dv-title { font-size: 1.2rem; font-weight: 700; color: var(--white); margin-bottom: 28px; }
+
+    .dv-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .dv-item:last-child { border-bottom: none; }
+
+    .dv-num {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--orange);
+      min-width: 60px;
+    }
+
+    .dv-info h4 { font-size: 0.95rem; font-weight: 600; color: var(--white); margin-bottom: 2px; }
+    .dv-info p { font-size: 0.8rem; color: rgba(255,255,255,0.55); }
+
+    /* ── CONTATO ── */
+    #contato { background: var(--gray-light); }
+
+    .contato-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+    }
+
+    .contato-info h2 { margin-bottom: 16px; }
+    .contato-info .section-desc { margin-bottom: 36px; }
+
+    .info-list { display: flex; flex-direction: column; gap: 20px; }
+
+    .info-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .info-icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(232, 117, 42, 0.1);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .info-icon svg { width: 20px; height: 20px; stroke: var(--orange); stroke-width: 2; fill: none; }
+
+    .info-item h4 { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--gray); margin-bottom: 3px; }
+    .info-item p, .info-item a { font-size: 0.95rem; color: var(--dark); text-decoration: none; }
+    .info-item a:hover { color: var(--orange); }
+
+    .contato-mapa { display: flex; flex-direction: column; gap: 24px; }
+
+    .mapa-wrapper {
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      flex: 1;
+    }
+
+    .mapa-wrapper iframe {
+      width: 100%;
+      height: 340px;
+      display: block;
+      border: none;
+    }
+
+    .wa-btn-contato {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: #25D366;
+      color: var(--white);
+      padding: 16px 28px;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .wa-btn-contato:hover { background: #1EBE59; transform: translateY(-2px); }
+    .wa-btn-contato svg { width: 22px; height: 22px; fill: white; flex-shrink: 0; }
+
+    /* ── RODAPÉ ── */
+    footer {
+      background: var(--dark);
+      color: rgba(255,255,255,0.6);
+      padding: 56px 0 0;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 40px;
+    }
+
+    .footer-brand img { height: 50px; margin-bottom: 16px; filter: brightness(0) invert(1); }
+    .footer-brand p { font-size: 0.875rem; line-height: 1.65; max-width: 280px; }
+
+    .footer-col h5 {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a { font-size: 0.875rem; color: rgba(255,255,255,0.55); text-decoration: none; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: var(--orange); }
+    .footer-col p { font-size: 0.875rem; line-height: 1.7; }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 20px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .footer-bottom p { font-size: 0.8rem; color: rgba(255,255,255,0.4); }
+
+    /* ── WHATSAPP FLUTUANTE ── */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 900;
+      width: 56px;
+      height: 56px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4);
+      text-decoration: none;
+    }
+
+    .whatsapp-float svg { width: 28px; height: 28px; fill: white; }
+
+    /* ══════════════════════════════════
+       RESPONSIVO — todos os breakpoints
+       ══════════════════════════════════ */
+
+    /* ── 1024px · Tablet ── */
+    @media (max-width: 1024px) {
+      .hero-grid          { gap: 48px; }
+      .sobre-grid         { gap: 48px; }
+      .diferenciais-grid  { gap: 44px; }
+      .contato-grid       { gap: 44px; }
+      .servicos-grid      { grid-template-columns: repeat(2, 1fr); }
+      .numeros-grid       { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid        { grid-template-columns: 1.5fr 1fr 1fr; gap: 36px; }
+    }
+
+    /* ── 768px · Mobile ── */
+    @media (max-width: 768px) {
+      /* layout geral */
+      section { padding: 72px 0; }
+      .container { padding: 0 20px; }
+
+      /* header */
+      nav                 { display: none; }
+      .hamburger          { display: flex; }
+      .logo-wrap img      { height: 52px; }
+
+      /* hero */
+      .hero-grid          { grid-template-columns: 1fr; gap: 36px;
+                            text-align: center; padding: 64px 20px; }
+      .hero-badge         { white-space: normal; justify-content: center;
+                            text-align: center; max-width: 90%; margin-left: auto;
+                            margin-right: auto; line-height: 1.5; }
+      .hero-subtitle      { margin: 0 auto 28px; }
+      .hero-actions       { justify-content: center; }
+      .hero-stats         { grid-template-columns: repeat(3, 1fr);
+                            gap: 12px; margin-top: 32px; }
+      .hero-visual        { display: none; }
+      .hero-floats        { opacity: .5; }
+
+      /* sobre */
+      .sobre-grid         { grid-template-columns: 1fr; gap: 36px; }
+      .sobre-img          { height: 300px; }
+      .sobre-float strong { font-size: 1.15rem; }
+      .sobre-float        { padding: 12px 14px; }
+      .sobre-float-tag    { font-size: .72rem; padding: 6px 10px; }
+
+      /* serviços */
+      .servicos-grid      { grid-template-columns: 1fr; }
+      .servico-card       { padding: 28px 22px; }
+
+      /* banner */
+      #banner-cta         { padding: 72px 0; }
+
+      /* diferenciais */
+      .diferenciais-grid  { grid-template-columns: 1fr; gap: 36px; }
+      .diferenciais-visual{ padding: 36px 28px; }
+
+      /* números */
+      #numeros            { padding: 64px 0; }
+      .numeros-header     { margin-bottom: 32px; }
+      .numeros-grid       { grid-template-columns: 1fr; gap: 2px;
+                            border-radius: 16px; overflow: hidden; }
+      .numero-card        { display: flex; flex-direction: column;
+                            align-items: center; text-align: center;
+                            padding: 28px 24px; }
+      .numero-card .odo-num { font-size: 2.8rem; margin-bottom: 8px;
+                              justify-content: center; }
+      .numero-card .num-label { font-size: 0.9rem; margin-bottom: 4px; }
+      .numero-card .num-desc  { max-width: 100%; font-size: 0.8rem; }
+
+      /* app */
+      .app-inner          { grid-template-columns: 1fr; gap: 40px; padding: 64px 20px; }
+      .app-visual         { order: -1; display: flex; justify-content: center; }
+      .app-cover-img      { width: 100%; max-width: 320px; height: auto;
+                            margin: 0 auto; border-radius: 16px; }
+      .app-content        { display: flex; flex-direction: column;
+                            align-items: center; text-align: center; }
+      .app-content .section-label { justify-content: center; }
+      .app-features       { width: 100%; text-align: left; margin-bottom: 24px; }
+      .app-btns           { justify-content: center; }
+      .app-btns-wrap      { width: 100%; text-align: center; }
+
+      /* contato */
+      .contato-grid       { grid-template-columns: 1fr; gap: 36px; }
+      .mapa-wrapper iframe{ height: 280px; }
+
+      /* rodapé */
+      .footer-grid        { grid-template-columns: 1fr; gap: 28px; }
+      .footer-bottom      { flex-direction: column; text-align: center; gap: 4px; }
+    }
+
+    /* ── 600px · Mobile médio ── */
+    @media (max-width: 600px) {
+      .odo-num            { font-size: 2.6rem; }
+      .sobre-float-cards  { gap: 8px; }
+      .sobre-float span   { font-size: .68rem; }
+    }
+
+    /* ── 480px · Mobile pequeno ── */
+    @media (max-width: 480px) {
+      section             { padding: 56px 0; }
+      .container          { padding: 0 16px; }
+      .header-inner       { padding: 0 16px; }
+
+      h1                  { font-size: 2rem; }
+      .hero-grid          { padding: 52px 16px; }
+      .hero-stats         { grid-template-columns: 1fr; gap: 10px; margin-top: 24px; }
+      .stat-number        { font-size: 1.7rem; }
+      .hero-badge         { font-size: .72rem; }
+      .hero-actions       { flex-direction: column; align-items: center; gap: 12px; }
+      .btn-primary,
+      .btn-outline        { width: 100%; text-align: center; padding: 13px 20px; }
+      .hero-floats        { display: none; }
+
+      .sobre-img          { height: 240px; }
+      .sobre-float-cards  { position: static; margin-top: 12px;
+                            justify-content: center; }
+
+      .servico-card       { padding: 24px 18px; }
+      .diferenciais-visual{ padding: 28px 20px; }
+      .dv-num             { font-size: 1.3rem; min-width: 48px; }
+
+      .odo-num            { font-size: 2rem; }
+      .numero-card        { padding: 22px 16px; }
+      .numero-card .odo-num { font-size: 2.4rem; }
+      .numero-card .num-label { font-size: 0.85rem; }
+      .numero-card .num-desc  { font-size: 0.75rem; }
+
+      .app-inner          { padding: 56px 16px; gap: 28px; }
+      .app-cover-img      { max-width: 260px; }
+      .app-btn img        { height: 44px; }
+
+      .wa-btn-contato     { font-size: .9rem; padding: 14px 18px; }
+      .mapa-wrapper iframe{ height: 240px; }
+
+      .footer-brand img   { height: 42px; }
+
+      .whatsapp-float     { width: 48px; height: 48px; bottom: 20px; right: 20px; }
+      .whatsapp-float svg { width: 24px; height: 24px; }
+    }
+
+    /* ── 360px · Mobile muito pequeno ── */
+    @media (max-width: 360px) {
+      .container          { padding: 0 12px; }
+      .header-inner       { padding: 0 12px; }
+      .logo-wrap img      { height: 44px; }
+      h1                  { font-size: 1.75rem; }
+      .odo-num            { font-size: 2.2rem; }
+      .numero-card        { padding: 18px 12px; }
+      .numero-card .odo-num { font-size: 2.2rem; }
+      .app-cover-img      { max-width: 220px; }
+      .btn-primary,
+      .btn-outline        { font-size: .875rem; padding: 12px 16px; }
+      .hero-badge         { font-size: .68rem; white-space: normal; text-align: center; }
+    }
+
+    /* ── FLOATING NUMBERS NO HERO ── */
+    .hero-floats {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-floats span {
+      position: absolute;
+      font-weight: 800;
+      color: rgba(232, 117, 42, 0.07);
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    @keyframes drift { 0%,100% { transform: translateY(0); opacity:.07; } 50% { transform: translateY(-18px); opacity:.14; } }
+
+    .hero-floats span:nth-child(1)  { font-size:1.1rem; top:10%; left:3%;   animation: drift 13s ease-in-out infinite 0s; }
+    .hero-floats span:nth-child(2)  { font-size:2rem;   top:22%; right:5%;  animation: drift 16s ease-in-out infinite 2s; }
+    .hero-floats span:nth-child(3)  { font-size:.9rem;  top:55%; left:7%;   animation: drift 11s ease-in-out infinite 4s; }
+    .hero-floats span:nth-child(4)  { font-size:2.4rem; top:72%; right:8%;  animation: drift 18s ease-in-out infinite 1s; }
+    .hero-floats span:nth-child(5)  { font-size:1.3rem; top:33%; left:14%;  animation: drift 14s ease-in-out infinite 5s; }
+    .hero-floats span:nth-child(6)  { font-size:.85rem; top:82%; left:38%;  animation: drift 12s ease-in-out infinite 3s; }
+    .hero-floats span:nth-child(7)  { font-size:1.6rem; top:14%; left:48%;  animation: drift 17s ease-in-out infinite 6s; }
+    .hero-floats span:nth-child(8)  { font-size:1rem;   top:63%; right:20%; animation: drift 10s ease-in-out infinite 2.5s; }
+    .hero-floats span:nth-child(9)  { font-size:1.4rem; top:44%; right:4%;  animation: drift 15s ease-in-out infinite 4.5s; }
+    .hero-floats span:nth-child(10) { font-size:.95rem; top:88%; left:20%;  animation: drift 13s ease-in-out infinite 7s; }
+    .hero-floats span:nth-child(11) { font-size:1.7rem; top:28%; right:28%; animation: drift 19s ease-in-out infinite 1.5s; }
+    .hero-floats span:nth-child(12) { font-size:.8rem;  top:75%; left:58%;  animation: drift 11s ease-in-out infinite 8s; }
+
+    .hero-grid { position: relative; z-index: 1; }
+
+    /* ── SEÇÃO NOSSOS NÚMEROS ── */
+    #numeros {
+      background: linear-gradient(135deg, #111 0%, #1c1c1c 100%);
+      padding: 96px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .numeros-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .numeros-bg span {
+      position: absolute;
+      font-weight: 800;
+      color: rgba(232,117,42,0.05);
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    .numeros-bg span:nth-child(1) { font-size:5rem;  top:5%;  left:1%;   animation: drift 16s ease-in-out infinite 0s; }
+    .numeros-bg span:nth-child(2) { font-size:6rem;  top:45%; right:1%;  animation: drift 20s ease-in-out infinite 3s; }
+    .numeros-bg span:nth-child(3) { font-size:3.5rem;top:72%; left:28%;  animation: drift 14s ease-in-out infinite 5s; }
+    .numeros-bg span:nth-child(4) { font-size:5rem;  top:18%; right:22%; animation: drift 18s ease-in-out infinite 1s; }
+    .numeros-bg span:nth-child(5) { font-size:3rem;  top:85%; left:58%;  animation: drift 12s ease-in-out infinite 7s; }
+
+    #numeros .container { position: relative; z-index: 1; }
+
+    .numeros-header { text-align: center; margin-bottom: 56px; }
+    .numeros-header h2 { color: var(--white); }
+    .numeros-header .section-label { justify-content: center; color: rgba(255,255,255,0.55); }
+    .numeros-header .section-label::before { background: rgba(255,255,255,0.3); }
+    .numeros-header .section-desc { color: rgba(255,255,255,0.55); margin: 0 auto; text-align: center; }
+
+    .numeros-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 24px;
+      overflow: hidden;
+    }
+
+    .numero-card {
+      padding: 44px 28px;
+      background: rgba(255,255,255,0.02);
+      text-align: center;
+      position: relative;
+      transition: background 0.3s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .numero-card:hover { background: rgba(232,117,42,0.07); }
+
+    .numero-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 2px;
+      background: var(--orange);
+      transition: width 0.4s ease;
+    }
+
+    .numero-card:hover::after { width: 55%; }
+
+    /* ── ODÔMETRO (slot machine) ── */
+    .odo-num {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      font-size: 3.4rem;
+      font-weight: 800;
+      color: var(--orange);
+      font-family: 'Inter', sans-serif;
+      line-height: 1;
+      margin-bottom: 14px;
+    }
+
+    .odo-pre {
+      font-size: 0.58em;
+      padding-bottom: 0.08em;
+      margin-right: 2px;
+    }
+
+    .odo-suf {
+      font-size: 0.48em;
+      padding-bottom: 0.08em;
+      margin-left: 4px;
+      color: var(--orange-light);
+    }
+
+    .odo-window {
+      height: 1em;
+      overflow: hidden;
+      display: flex;
+    }
+
+    .odo-track { display: flex; }
+
+    .odo-col {
+      display: flex;
+      flex-direction: column;
+      will-change: transform;
+    }
+
+    .odo-col span {
+      display: block;
+      height: 1em;
+      line-height: 1;
+      text-align: center;
+      min-width: 0.58em;
+    }
+
+    .num-label {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+
+    .num-desc {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.55;
+      max-width: 220px;
+    }
+
+    /* numeros-grid responsivo consolidado no bloco RESPONSIVO acima */
+
+    /* ── APP SECTION ── */
+    #app {
+      position: relative;
+      overflow: clip;
+      background: #111;
+      background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 60%, #111 100%);
+    }
+
+    #app::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 520px;
+      height: 520px;
+      background: radial-gradient(circle, rgba(232,117,42,0.18) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    #app::after {
+      content: '';
+      position: absolute;
+      bottom: -80px;
+      left: -60px;
+      width: 340px;
+      height: 340px;
+      background: radial-gradient(circle, rgba(232,117,42,0.09) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .app-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 96px 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .app-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .app-cover-img {
+      width: 100%;
+      max-width: 480px;
+      border-radius: 20px;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.6), 0 0 0 1px rgba(232,117,42,0.15), 0 0 80px rgba(232,117,42,0.1);
+      display: block;
+    }
+
+    .app-content { }
+
+    .app-content .section-label {
+      color: var(--orange-light);
+    }
+
+    .app-content .section-label::before {
+      background: var(--orange);
+    }
+
+    .app-content h2 {
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+
+    .app-content .section-desc {
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 36px;
+    }
+
+    .app-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 36px;
+    }
+
+    .app-features li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: rgba(255,255,255,0.9);
+      font-size: 0.95rem;
+    }
+
+    .app-features li::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--orange);
+      flex-shrink: 0;
+    }
+
+    .app-btns-wrap {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 20px 24px;
+    }
+
+    .app-btns-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 14px;
+    }
+
+    .app-btns {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .app-btn {
+      display: block;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+
+    .app-btn:hover { opacity: 0.85; transform: translateY(-2px); }
+
+    .app-btn img {
+      height: 52px;
+      width: auto;
+      border-radius: 10px;
+      display: block;
+    }
+
+    /* ── BARRA DE PROGRESSO ── */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--orange), var(--orange-light));
+      z-index: 2000;
+      border-radius: 0 2px 2px 0;
+      transition: width 0.08s linear;
+    }
+
+    /* ── KEYFRAMES ── */
+    @keyframes heroFadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes heroFadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* ── ANIMAÇÃO DO HERO (CSS puro, sem JS) ── */
+    .hero-badge   { animation: heroFadeUp 0.7s ease both; animation-delay: 0.1s; }
+    h1            { animation: heroFadeUp 0.7s ease both; animation-delay: 0.25s; }
+    .hero-subtitle{ animation: heroFadeUp 0.7s ease both; animation-delay: 0.4s; }
+    .hero-actions { animation: heroFadeUp 0.7s ease both; animation-delay: 0.55s; }
+    .hero-stats   { animation: heroFadeUp 0.7s ease both; animation-delay: 0.7s; }
+    .hero-card    { animation: heroFadeIn 0.9s ease both; animation-delay: 0.5s; }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(38px);
+      transition: opacity 0.65s cubic-bezier(.22,.68,0,1.2), transform 0.65s cubic-bezier(.22,.68,0,1.2);
+    }
+    .reveal.from-left  { transform: translateX(-38px); }
+    .reveal.from-right { transform: translateX(38px); }
+    .reveal.scale-in   { transform: scale(0.87); }
+    .reveal.visible    { opacity: 1 !important; transform: none !important; }
+
+    /* Cards inside overflow:hidden grid must not translateY or they get clipped */
+    .numero-card.reveal { transform: none; }
+
+    .stagger-1 { transition-delay: 0.05s; }
+    .stagger-2 { transition-delay: 0.15s; }
+    .stagger-3 { transition-delay: 0.25s; }
+    .stagger-4 { transition-delay: 0.35s; }
+    .stagger-5 { transition-delay: 0.45s; }
+    .stagger-6 { transition-delay: 0.55s; }
+
+    /* ── SHIMMER NOS CARDS DE SERVIÇO ── */
+    .servico-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -80%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+      transition: left 0.55s ease;
+      pointer-events: none;
+    }
+    .servico-card:hover::after { left: 160%; }
+
+    /* ── UNDERLINE ANIMADO NO NAV ── */
+    nav a:not(.btn-cta) { position: relative; }
+    nav a:not(.btn-cta)::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--orange);
+      border-radius: 1px;
+      transition: width 0.25s ease;
+    }
+    nav a:not(.btn-cta):hover::after { width: 100%; }
+
+    /* ── GLOW NOS BOTÕES PRIMÁRIOS ── */
+    .btn-primary, .btn-cta {
+      box-shadow: 0 0 0 0 rgba(232,117,42,0);
+      transition: background 0.2s, transform 0.15s, box-shadow 0.3s;
+    }
+    .btn-primary:hover { box-shadow: 0 6px 28px rgba(232,117,42,0.45); }
+    .btn-cta:hover     { box-shadow: 0 4px 18px rgba(232,117,42,0.4); }
+
+    /* ── GLOW NOS INFO-ICONS ── */
+    .info-icon, .dif-icon, .servico-icon, .value-card .icon {
+      transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+    }
+    .info-item:hover .info-icon,
+    .diferencial-list li:hover .dif-icon {
+      background: var(--orange);
+      transform: scale(1.1);
+      box-shadow: 0 4px 14px rgba(232,117,42,0.35);
+    }
+    .info-item:hover .info-icon svg,
+    .diferencial-list li:hover .dif-icon svg {
+      stroke: white;
+    }
+    .info-icon svg, .dif-icon svg { transition: stroke 0.3s; }
+
+    /* ── LINHA ANIMADA NA SECTION-LABEL ── */
+    .section-label::before {
+      transition: width 0.4s ease;
+    }
+    .visible .section-label::before,
+    .section-label:hover::before { width: 36px; }
+
+    /* ══════════════════════════════════════════════════
+       OVERRIDES RESPONSIVOS — aplicados após o CSS base
+       (numeros-grid e app-inner são definidos abaixo das
+       media queries do topo, então precisam de override aqui)
+       ══════════════════════════════════════════════════ */
+
+    @media (max-width: 1024px) {
+      .numeros-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      /* Nossos Números: coluna única, cards empilhados */
+      .numeros-grid       { grid-template-columns: 1fr; }
+      .numero-card        { flex-direction: column; align-items: center;
+                            text-align: center; padding: 28px 24px; }
+      .numero-card .odo-num   { font-size: 2.8rem; margin-bottom: 8px;
+                                justify-content: center; }
+      .numero-card .num-label { font-size: 0.9rem; margin-bottom: 4px; }
+      .numero-card .num-desc  { max-width: 100%; font-size: 0.8rem; }
+
+      /* App: imagem no topo, conteúdo abaixo centralizado */
+      .app-inner    { grid-template-columns: 1fr; gap: 40px; padding: 64px 20px; }
+      .app-visual   { order: -1; display: flex; justify-content: center; }
+      .app-cover-img{ width: 100%; max-width: 320px; height: auto;
+                      margin: 0 auto; border-radius: 16px; }
+      .app-content  { display: flex; flex-direction: column;
+                      align-items: center; text-align: center; }
+      .app-content .section-label { justify-content: center; }
+      .app-features { width: 100%; text-align: left; margin-bottom: 24px; }
+      .app-btns     { justify-content: center; }
+      .app-btns-wrap{ width: 100%; text-align: center; }
+    }
+
+    @media (max-width: 480px) {
+      .numeros-grid       { grid-template-columns: 1fr; }
+      .numero-card        { padding: 22px 16px; }
+      .numero-card .odo-num   { font-size: 2.4rem; }
+      .numero-card .num-label { font-size: 0.85rem; }
+      .numero-card .num-desc  { font-size: 0.75rem; }
+
+      .app-inner    { padding: 56px 16px; gap: 28px; }
+      .app-cover-img{ max-width: 260px; }
+    }
+
+    @media (max-width: 360px) {
+      .numero-card        { padding: 18px 12px; }
+      .numero-card .odo-num   { font-size: 2.2rem; }
+      .app-cover-img{ max-width: 220px; }
+    }
+  </style>
+</head>
+<body>
+  <div id="progress-bar"></div>
+
+  <!-- HEADER -->
+  <header id="header">
+    <div class="header-inner">
+      <a href="#inicio" class="logo-wrap">
+        <img src="logo.png" alt="Tributex Gestão Contábil e Financeira - logotipo">
+      </a>
+      <nav>
+        <a href="#inicio">Início</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#diferenciais">Diferenciais</a>
+        <a href="#contato">Contato</a>
+        <a href="https://wa.me/5561994024473" class="btn-cta" target="_blank" rel="noopener noreferrer">Fale conosco</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- MENU MOBILE -->
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="#inicio" onclick="closeMobile()">Início</a>
+    <a href="#sobre" onclick="closeMobile()">Sobre</a>
+    <a href="#servicos" onclick="closeMobile()">Serviços</a>
+    <a href="#diferenciais" onclick="closeMobile()">Diferenciais</a>
+    <a href="#contato" onclick="closeMobile()">Contato</a>
+    <a href="https://wa.me/5561994024473" class="btn-cta" style="width:fit-content;" target="_blank" rel="noopener noreferrer">Fale conosco</a>
+  </nav>
+
+  <!-- HERO -->
+  <section id="inicio">
+    <div class="hero-floats" aria-hidden="true">
+      <span>IRPJ</span>
+      <span>15%</span>
+      <span>COFINS</span>
+      <span>DRE</span>
+      <span>R$</span>
+      <span>CSLL</span>
+      <span>SPED</span>
+      <span>ISS</span>
+      <span>3,75%</span>
+      <span>ICMS</span>
+      <span>CNPJ</span>
+      <span>PIS</span>
+    </div>
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Contabilidade de excelência em Brasília
+        </div>
+        <h1><span>Tributex</span> Gestão<br>Contábil e Financeira</h1>
+        <p class="hero-subtitle">Soluções contábeis completas e personalizadas, com excelência técnica, ética e transparência, para o crescimento sustentável do seu negócio.</p>
+        <div class="hero-actions">
+          <a href="https://wa.me/5561994024473" class="btn-primary" target="_blank" rel="noopener noreferrer">Falar pelo WhatsApp</a>
+          <a href="#servicos" class="btn-outline">Ver serviços</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-number">+5</div>
+            <div class="stat-label">Anos de atuação</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Foco no cliente</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">360°</div>
+            <div class="stat-label">Gestão contábil</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-card">
+          <div class="hero-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          </div>
+          <h3>Contabilidade que impulsiona seu negócio</h3>
+          <p>Muito além dos números — estratégia, conformidade e crescimento.</p>
+          <ul class="hero-card-list">
+            <li>
+              <span class="check-icon"><svg viewBox="0 0 12 12"><polyline points="1.5 6 4.5 9 10.5 3"/></svg></span>
+              Contabilidade societária completa
+            </li>
+            <li>
+              <span class="check-icon"><svg viewBox="0 0 12 12"><polyline points="1.5 6 4.5 9 10.5 3"/></svg></span>
+              Gestão tributária estratégica
+            </li>
+            <li>
+              <span class="check-icon"><svg viewBox="0 0 12 12"><polyline points="1.5 6 4.5 9 10.5 3"/></svg></span>
+              Assessoria financeira especializada
+            </li>
+            <li>
+              <span class="check-icon"><svg viewBox="0 0 12 12"><polyline points="1.5 6 4.5 9 10.5 3"/></svg></span>
+              Atendimento personalizado e transparente
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section id="sobre">
+    <div class="container">
+      <div class="sobre-grid">
+        <div class="sobre-text">
+          <span class="section-label">Sobre nós</span>
+          <h2>Cinco anos construindo confiança</h2>
+          <blockquote class="slogan">"Manter a sua contabilidade em dia é uma obrigação rotineira e nunca um objetivo."</blockquote>
+          <p>A Tributex surgiu em 2020 com o objetivo de oferecer serviços de contabilidade de alto padrão. Após cinco anos de atuação efetiva e concreta, consolidamo-nos como especialistas em contabilidade societária e gestão tributária de excelência.</p>
+          <p>Atuamos com empresas de grande, médio e pequeno porte, sempre priorizando a transparência nos procedimentos e a qualidade dos serviços prestados. Nosso compromisso é contribuir para o crescimento sustentável e a segurança financeira de cada cliente.</p>
+        </div>
+
+        <div class="sobre-visual">
+          <div class="sobre-photo-wrap">
+            <img
+              src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?auto=format&fit=crop&w=700&q=80"
+              alt="Profissional de contabilidade analisando relatórios financeiros"
+              class="sobre-img"
+              loading="lazy">
+            <span class="sobre-float-tag">Desde 2020 em Brasília</span>
+            <div class="sobre-float-cards">
+              <div class="sobre-float">
+                <strong>+5 anos</strong>
+                <span>de mercado</span>
+              </div>
+              <div class="sobre-float">
+                <strong>360°</strong>
+                <span>gestão contábil</span>
+              </div>
+              <div class="sobre-float">
+                <strong>PME</strong>
+                <span>especialistas</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVIÇOS -->
+  <section id="servicos">
+    <div class="container">
+      <div class="servicos-header">
+        <span class="section-label">Nossos serviços</span>
+        <h2>Soluções contábeis completas</h2>
+        <p class="section-desc">Oferecemos um portfólio abrangente de serviços para que sua empresa cresça com segurança e conformidade.</p>
+      </div>
+
+      <div class="servicos-grid">
+        <div class="servico-card">
+          <div class="servico-icon">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </div>
+          <h3>Contabilidade societária</h3>
+          <p>Escrituração contábil completa, elaboração de demonstrações financeiras (balanço, DRE, fluxo de caixa) e relatórios gerenciais para tomada de decisão.</p>
+        </div>
+
+        <div class="servico-card">
+          <div class="servico-icon">
+            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <h3>Gestão tributária</h3>
+          <p>Planejamento tributário estratégico, apuração de impostos, declarações fiscais e acompanhamento do enquadramento tributário mais vantajoso para sua empresa.</p>
+        </div>
+
+        <div class="servico-card">
+          <div class="servico-icon">
+            <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
+          <h3>Departamento fiscal</h3>
+          <p>Apuração e controle de tributos (ICMS, PIS, COFINS, ISS, IPI), emissão de guias de recolhimento e entrega das obrigações acessórias nos prazos corretos.</p>
+        </div>
+
+        <div class="servico-card">
+          <div class="servico-icon">
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3>Departamento pessoal</h3>
+          <p>Processamento de folha de pagamento, admissões e demissões, cálculo de encargos sociais, e-Social, eSocial, FGTS e INSS com total conformidade legal.</p>
+        </div>
+
+        <div class="servico-card">
+          <div class="servico-icon">
+            <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <h3>Assessoria financeira</h3>
+          <p>Análise de desempenho financeiro, controle de fluxo de caixa, projeções orçamentárias e orientações para a saúde financeira do seu negócio.</p>
+        </div>
+
+        <div class="servico-card">
+          <div class="servico-icon">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <h3>Consultoria contábil</h3>
+          <p>Orientação especializada para abertura, alteração ou encerramento de empresas, reestruturação societária e conformidade com as normas contábeis vigentes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BANNER CTA -->
+  <section id="banner-cta">
+    <div class="container">
+      <div class="banner-cta-inner">
+        <span class="section-label">Nossa missão</span>
+        <h2>Sua empresa em dia, sua tranquilidade garantida</h2>
+        <p>Cuidamos de toda a burocracia contábil e tributária para que você possa focar no que realmente importa — fazer seu negócio crescer com segurança.</p>
+        <a href="https://wa.me/5561994024473" class="btn-primary" target="_blank" rel="noopener noreferrer">Agendar uma conversa</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIFERENCIAIS -->
+  <section id="diferenciais">
+    <div class="container">
+      <div class="diferenciais-grid">
+        <div class="diferenciais-text">
+          <span class="section-label">Por que nos escolher</span>
+          <h2>Diferenciais que fazem a diferença</h2>
+          <p class="section-desc">A Tributex vai além da conformidade fiscal — somos um parceiro estratégico para o sucesso do seu negócio.</p>
+
+          <ul class="diferencial-list">
+            <li>
+              <div class="dif-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <div class="dif-text">
+                <h4>Segurança e conformidade total</h4>
+                <p>Mantemos sua empresa sempre em dia com as obrigações fiscais e societárias, evitando multas e irregularidades.</p>
+              </div>
+            </li>
+            <li>
+              <div class="dif-icon">
+                <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              </div>
+              <div class="dif-text">
+                <h4>Atendimento humanizado</h4>
+                <p>Cada cliente recebe atenção individualizada — você tem um contador dedicado ao seu negócio.</p>
+              </div>
+            </li>
+            <li>
+              <div class="dif-icon">
+                <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+              </div>
+              <div class="dif-text">
+                <h4>Resposta rápida e eficiente</h4>
+                <p>Dúvidas respondidas com agilidade e clareza, sem burocracia no atendimento.</p>
+              </div>
+            </li>
+            <li>
+              <div class="dif-icon">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+              </div>
+              <div class="dif-text">
+                <h4>Cinco anos de experiência comprovada</h4>
+                <p>Consolidados no mercado de Brasília, com histórico de excelência e clientes satisfeitos.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="diferenciais-visual">
+          <p class="dv-title">Nossa empresa em números</p>
+          <div class="dv-item">
+            <div class="dv-num">+5</div>
+            <div class="dv-info">
+              <h4>Anos no mercado</h4>
+              <p>Fundada em 2020, com crescimento contínuo</p>
+            </div>
+          </div>
+          <div class="dv-item">
+            <div class="dv-num">100%</div>
+            <div class="dv-info">
+              <h4>Transparência nos processos</h4>
+              <p>Você sempre sabe o que acontece na sua contabilidade</p>
+            </div>
+          </div>
+          <div class="dv-item">
+            <div class="dv-num">360°</div>
+            <div class="dv-info">
+              <h4>Visão completa do negócio</h4>
+              <p>Da contabilidade à gestão financeira estratégica</p>
+            </div>
+          </div>
+          <div class="dv-item">
+            <div class="dv-num">PME</div>
+            <div class="dv-info">
+              <h4>Especialistas em PMEs</h4>
+              <p>Foco em empresas de pequeno e médio porte</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOSSOS NÚMEROS -->
+  <section id="numeros">
+    <div class="numeros-bg" aria-hidden="true">
+      <span>IRPJ</span>
+      <span>R$</span>
+      <span>SPED</span>
+      <span>%</span>
+      <span>DRE</span>
+    </div>
+    <div class="container">
+      <div class="numeros-header">
+        <span class="section-label">Nossos números</span>
+        <h2>Resultados que falam por si</h2>
+        <p class="section-desc">Cada número representa anos de dedicação, precisão e compromisso com os nossos clientes.</p>
+      </div>
+      <div class="numeros-grid">
+
+        <div class="numero-card">
+          <div class="odo-num" data-prefix="+" data-value="100" data-suffix=""></div>
+          <p class="num-label">Empresas atendidas</p>
+          <p class="num-desc">Clientes de pequeno e médio porte em Brasília e Distrito Federal</p>
+        </div>
+
+        <div class="numero-card">
+          <div class="odo-num" data-prefix="" data-value="98" data-suffix="%"></div>
+          <p class="num-label">Índice de satisfação</p>
+          <p class="num-desc">Avaliação média dos clientes com o atendimento e serviços prestados</p>
+        </div>
+
+        <div class="numero-card">
+          <div class="odo-num" data-prefix="" data-value="5" data-suffix="+ anos"></div>
+          <p class="num-label">Anos de experiência</p>
+          <p class="num-desc">Desde 2020 entregando excelência contábil para empresas em crescimento</p>
+        </div>
+
+        <div class="numero-card">
+          <div class="odo-num" data-prefix="" data-value="100" data-suffix="%"></div>
+          <p class="num-label">Prazos cumpridos</p>
+          <p class="num-desc">Todas as declarações e obrigações acessórias entregues dentro do vencimento</p>
+        </div>
+
+        <div class="numero-card">
+          <div class="odo-num" data-prefix="+" data-value="120" data-suffix=""></div>
+          <p class="num-label">Declarações por ano</p>
+          <p class="num-desc">Entre IRPJ, ECF, SPED, eSocial e demais obrigações entregues anualmente</p>
+        </div>
+
+        <div class="numero-card">
+          <div class="odo-num" data-prefix="+" data-value="800" data-suffix=""></div>
+          <p class="num-label">Documentos por mês</p>
+          <p class="num-desc">Notas fiscais, folhas de pagamento e relatórios gerenciados mensalmente</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- APP -->
+  <section id="app">
+    <div class="app-inner">
+
+      <div class="app-visual">
+        <img class="app-cover-img" src="app-cover.png" alt="Tributex On-Line — aplicativo">
+      </div>
+
+      <div class="app-content">
+        <span class="section-label">Aplicativo</span>
+        <h2>Sua contabilidade<br>na palma da mão</h2>
+        <p class="section-desc">Acesse relatórios, documentos e acompanhe a situação fiscal da sua empresa em tempo real pelo aplicativo Tributex On-Line.</p>
+
+        <ul class="app-features">
+          <li>Consulte relatórios gerenciais a qualquer hora</li>
+          <li>Acompanhe prazos e obrigações fiscais</li>
+          <li>Comunicação direta com sua equipe contábil</li>
+          <li>Disponível para Android e iOS, gratuito</li>
+        </ul>
+
+        <div class="app-btns-wrap">
+          <p class="app-btns-label">Baixe grátis agora</p>
+          <div class="app-btns">
+            <a class="app-btn" href="https://play.google.com/store/apps/details?id=br.com.nuvtech.tributexonline&utm_source=latam_Med" target="_blank" rel="noopener" aria-label="Baixar na Google Play">
+              <img src="btn-google-play.png" alt="Disponível no Google Play">
+            </a>
+            <a class="app-btn" href="https://apps.apple.com/br/app/tributex-on-line/id6503295340" target="_blank" rel="noopener" aria-label="Baixar na App Store">
+              <img src="btn-app-store.png" alt="Baixar na App Store">
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section id="contato">
+    <div class="container">
+      <div class="contato-grid">
+        <div class="contato-info">
+          <span class="section-label">Fale conosco</span>
+          <h2>Entre em contato</h2>
+          <p class="section-desc">Nossa equipe está pronta para atendê-lo de segunda a sexta-feira, das 9h às 17h. Agende uma conversa sem compromisso.</p>
+
+          <ul class="info-list">
+            <li class="info-item">
+              <div class="info-icon">
+                <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.88a16 16 0 0 0 6 6l.72-.72a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.22 16.92z"/></svg>
+              </div>
+              <div>
+                <h4>Telefones</h4>
+                <a href="tel:+556136865581">(61) 3686-5581</a><br>
+                <a href="https://wa.me/5561994024473">(61) 99402-4473</a>
+              </div>
+            </li>
+            <li class="info-item">
+              <div class="info-icon">
+                <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <div>
+                <h4>E-mail</h4>
+                <a href="mailto:contato@tributex.com.br">contato@tributex.com.br</a>
+              </div>
+            </li>
+            <li class="info-item">
+              <div class="info-icon">
+                <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div>
+                <h4>Endereço</h4>
+                <p>SHIS QI 5 Bloco D, n° 5, Sala 10<br>Lago Sul, Brasília - DF<br>CEP 71.615-485</p>
+              </div>
+            </li>
+            <li class="info-item">
+              <div class="info-icon">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <div>
+                <h4>Horário de atendimento</h4>
+                <p>Segunda a sexta-feira<br>9h às 17h</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="contato-mapa">
+          <div class="mapa-wrapper">
+            <iframe
+              src="https://maps.google.com/maps?cid=11203485078004538113&output=embed&hl=pt-BR"
+              title="Mapa de localização da Tributex Contábil - SHIS QI 5 Bloco D, Lago Sul, Brasília"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              allowfullscreen>
+            </iframe>
+          </div>
+          <a href="https://wa.me/5561994024473" class="wa-btn-contato" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+            Iniciar conversa no WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RODAPÉ -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="logo.png" alt="Tributex - logotipo">
+          <p>Soluções contábeis completas e personalizadas para o crescimento sustentável e a segurança financeira da sua empresa.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Navegação</h5>
+          <ul>
+            <li><a href="#inicio">Início</a></li>
+            <li><a href="#sobre">Sobre nós</a></li>
+            <li><a href="#servicos">Serviços</a></li>
+            <li><a href="#diferenciais">Diferenciais</a></li>
+            <li><a href="#contato">Contato</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Contato</h5>
+          <p><a href="tel:+556136865581" style="color:rgba(255,255,255,0.55);text-decoration:none;">(61) 3686-5581</a></p>
+          <p style="margin-top:8px;"><a href="https://wa.me/5561994024473" style="color:rgba(255,255,255,0.55);text-decoration:none;">(61) 99402-4473</a></p>
+          <p style="margin-top:8px;"><a href="mailto:contato@tributex.com.br" style="color:rgba(255,255,255,0.55);text-decoration:none;">contato@tributex.com.br</a></p>
+          <p style="margin-top:8px;">SHIS QI 5 Bloco D, n° 5, Sala 10<br>Lago Sul, Brasília - DF</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2025 Tributex Contábil LTDA — CNPJ 39.226.757/0001-33</p>
+        <p>Desenvolvido com cuidado para sua empresa</p>
+      </div>
+    </div>
+
+    <!-- Rodapé MonteSite - Atualização Automática -->
+    <div id="montesite-footer-badge"></div>
+    <script src="https://vaabpicspdbolvutnscp.supabase.co/functions/v1/get-footer-iframe"></script>
+  </footer>
+
+  <!-- WHATSAPP FLUTUANTE -->
+  <a href="https://wa.me/5561994024473" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Falar pelo WhatsApp">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+  </a>
+
+  <script>
+    const header      = document.getElementById('header');
+    const progressBar = document.getElementById('progress-bar');
+    const heroEl      = document.getElementById('inicio');
+    const bannerEl    = document.getElementById('banner-cta');
+
+    /* ── SCROLL: header + barra de progresso + parallax ── */
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      const maxScroll = document.body.scrollHeight - window.innerHeight;
+
+      header.classList.toggle('scrolled', scrollY > 20);
+      progressBar.style.width = (scrollY / maxScroll * 100) + '%';
+
+      // Parallax suave nas seções com imagem de fundo
+      if (heroEl)   heroEl.style.backgroundPositionY   = `calc(50% + ${scrollY * 0.28}px)`;
+      if (bannerEl) {
+        const rect   = bannerEl.getBoundingClientRect();
+        const offset = (window.innerHeight * 0.5 - rect.top) * 0.18;
+        bannerEl.style.backgroundPositionY = `calc(50% + ${offset}px)`;
+      }
+    }, { passive: true });
+
+    /* ── SCROLL REVEAL via IntersectionObserver ── */
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
+
+    const revealGroups = [
+      { sel: '.sobre-text',           mod: 'from-left' },
+      { sel: '.sobre-visual',         mod: 'from-right' },
+      { sel: '.servicos-header',      mod: '' },
+      { sel: '.servico-card',         mod: '', stagger: true },
+      { sel: '.banner-cta-inner',     mod: '' },
+      { sel: '.diferenciais-text',    mod: 'from-left' },
+      { sel: '.diferenciais-visual',  mod: 'from-right' },
+      { sel: '.numeros-header',       mod: '' },
+      { sel: '.numero-card',          mod: '', stagger: true },
+      { sel: '.app-visual',           mod: 'from-left' },
+      { sel: '.app-content',          mod: 'from-right' },
+      { sel: '.contato-info',         mod: 'from-left' },
+      { sel: '.contato-mapa',         mod: 'from-right' },
+      { sel: '.diferencial-list li',  mod: '', stagger: true },
+      { sel: '.info-item',            mod: '', stagger: true },
+      { sel: '.dv-item',              mod: '', stagger: true },
+      { sel: '.footer-grid > *',      mod: '', stagger: true },
+    ];
+
+    revealGroups.forEach(({ sel, mod, stagger }) => {
+      document.querySelectorAll(sel).forEach((el, i) => {
+        el.classList.add('reveal');
+        if (mod) el.classList.add(mod);
+        if (stagger) el.classList.add('stagger-' + Math.min(i + 1, 6));
+        revealObs.observe(el);
+      });
+    });
+
+    /* ── CONTADOR ANIMADO NAS STATS DO HERO ── */
+    function animateCounter(el, prefix, value, suffix) {
+      const duration = 1600;
+      const start    = performance.now();
+      const ease     = t => 1 - Math.pow(1 - t, 3);
+
+      (function tick(now) {
+        const p = Math.min((now - start) / duration, 1);
+        el.textContent = prefix + Math.round(value * ease(p)) + suffix;
+        if (p < 1) requestAnimationFrame(tick);
+      })(start);
+    }
+
+    const statsObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.querySelectorAll('.stat-number').forEach(el => {
+          const raw = el.textContent.trim();
+          if      (raw.startsWith('+'))  animateCounter(el, '+', parseInt(raw.slice(1)), '');
+          else if (raw.endsWith('%'))    animateCounter(el, '',  parseInt(raw), '%');
+          else if (raw.endsWith('°'))   animateCounter(el, '',  parseInt(raw), '°');
+        });
+        statsObs.unobserve(entry.target);
+      });
+    }, { threshold: 0.6 });
+
+    const heroStats = document.querySelector('.hero-stats');
+    if (heroStats) statsObs.observe(heroStats);
+
+    /* ── ODÔMETRO (slot machine por dígito) ── */
+    function buildOdometer(el) {
+      const prefix = el.dataset.prefix || '';
+      const suffix = el.dataset.suffix || '';
+      const value  = parseInt(el.dataset.value) || 0;
+      const digits = String(value).split('').map(Number);
+
+      el.innerHTML = '';
+
+      if (prefix) {
+        const pre = document.createElement('span');
+        pre.className = 'odo-pre';
+        pre.textContent = prefix;
+        el.appendChild(pre);
+      }
+
+      const win = document.createElement('div');
+      win.className = 'odo-window';
+      const track = document.createElement('div');
+      track.className = 'odo-track';
+      win.appendChild(track);
+      el.appendChild(win);
+
+      digits.forEach((digit, i) => {
+        const col = document.createElement('div');
+        col.className = 'odo-col';
+        for (let d = 0; d <= 9; d++) {
+          const s = document.createElement('span');
+          s.textContent = d;
+          col.appendChild(s);
+        }
+        col.style.transition = 'none';
+        col.style.transform = 'translateY(-9em)'; // start at 9
+
+        track.appendChild(col);
+
+        // Settle to target digit after a short spin
+        setTimeout(() => {
+          col.style.transition = `transform ${1.4 + i * 0.12}s cubic-bezier(0.22, 1, 0.36, 1)`;
+          col.style.transitionDelay = `${i * 0.09}s`;
+          col.style.transform = `translateY(calc(-${digit} * 1em))`;
+        }, 60);
+      });
+
+      if (suffix) {
+        const suf = document.createElement('span');
+        suf.className = 'odo-suf';
+        suf.textContent = suffix;
+        el.appendChild(suf);
+      }
+    }
+
+    // Dispara os odômetros quando a seção entra na tela
+    const odoObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.querySelectorAll('.odo-num:not([data-built])').forEach(el => {
+          el.dataset.built = '1';
+          buildOdometer(el);
+        });
+        odoObs.unobserve(entry.target);
+      });
+    }, { threshold: 0.1 });
+
+    const numSection = document.getElementById('numeros');
+    if (numSection) odoObs.observe(numSection);
+
+    /* ── MENU MOBILE ── */
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', isOpen);
+    });
+
+    function closeMobile() {
+      mobileMenu.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+    }
+
+    document.addEventListener('click', e => {
+      if (!header.contains(e.target) && !mobileMenu.contains(e.target)) closeMobile();
+    });
+  </script>
+</body>
+</html>
